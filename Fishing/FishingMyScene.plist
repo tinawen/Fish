@@ -4,17 +4,19 @@
 <dict>
 	<key>Default</key>
 	<dict>
+		<key>fishDensity</key>
+		<integer>1</integer>
 		<key>percentComingFromLeft</key>
 		<integer>50</integer>
 		<key>fishToSharkFrequency</key>
 		<integer>10</integer>
 		<key>fishToWhaleFrequency</key>
 		<integer>50</integer>
+		<key>fishMouthHitTargetRadius</key>
+		<integer>6</integer>
 		<key>sharkMouthHitTargetRadius</key>
 		<integer>6</integer>
 		<key>whaleMouthHitTargetRadius</key>
-		<integer>6</integer>
-		<key>fishMouthHitTargetRadius</key>
 		<integer>6</integer>
 		<key>hookRaisingSpeed</key>
 		<integer>2</integer>
@@ -22,12 +24,10 @@
 		<integer>2</integer>
 		<key>fishSwimmingSpeed</key>
 		<real>12.5</real>
-		<key>whaleSwimmingSpeed</key>
-		<integer>4</integer>
 		<key>sharkSwimmingSpeed</key>
 		<integer>8</integer>
-		<key>fishDensity</key>
-		<integer>1</integer>
+		<key>whaleSwimmingSpeed</key>
+		<integer>4</integer>
 	</dict>
 </dict>
 </plist>

@@ -217,7 +217,7 @@ NSUInteger WHALETYPE = 2;
 - (void)dropHook {
     [self.hook removeAllActions];
     [self.hookLine removeAllActions];
-     SKAction *hookGoingDownOnceAction = [SKAction moveByX:0 y:-20 duration:1/[self.theme floatForKey:@"hookDroppingSpeed"]];
+    SKAction *hookGoingDownOnceAction = [SKAction moveByX:0 y:-20 duration:1/[self.theme floatForKey:@"hookDroppingSpeed"]];
     SKAction *hookGoingDownAction = [SKAction repeatActionForever:hookGoingDownOnceAction];
     [self.hook runAction:hookGoingDownAction];
     SKAction *hookLineOnceAction = [SKAction resizeByWidth:0 height:20 duration:1/[self.theme floatForKey:@"hookDroppingSpeed"]];
@@ -227,10 +227,13 @@ NSUInteger WHALETYPE = 2;
 
 - (void)raiseHook {
     [self.hook removeAllActions];
+    [self.hookLine removeAllActions];
+    if (self.hook.position.y >= CGRectGetMaxY(self.boat.frame) - self.hook.size.height - 10) {
+        return;
+    }
      SKAction *hookGoingUpOnceAction = [SKAction moveByX:0 y:20 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
     SKAction *hookGoingUpAction = [SKAction repeatActionForever:hookGoingUpOnceAction];
     [self.hook runAction:hookGoingUpAction];
-     [self.hookLine removeAllActions];
     SKAction *hookLineOnceAction = [SKAction resizeByWidth:0 height:-20 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
     SKAction *hookLineAction = [SKAction repeatActionForever:hookLineOnceAction];
     [self.hookLine runAction:hookLineAction];
@@ -250,7 +253,6 @@ NSUInteger WHALETYPE = 2;
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact {
-    
     // wall collision
     if ((contact.bodyA.node == self.scene && contact.bodyB.node == self.hook) ||
         (contact.bodyB.node == self.scene && contact.bodyA.node == self.hook)) {
@@ -259,6 +261,7 @@ NSUInteger WHALETYPE = 2;
         if (contact.contactPoint.y > 0.7 * self.frame.size.height) {
             self.hook.position = CGPointMake(self.boat.frame.origin.x + self.hook.size.width/2.0, CGRectGetMaxY(self.boat.frame) - self.hook.size.height - 5);
             self.hookLine.position = CGPointMake(self.hook.position.x - 4, self.hook.position.y + self.hook.size.height);
+            self.hookLine.size = CGSizeMake(3, 3);
             if (self.fishBeingCaught) {
                 [self.fishBeingCaught removeAllActions];
 
@@ -289,19 +292,16 @@ NSUInteger WHALETYPE = 2;
         fish = (SKSpriteNode *)contact.bodyB.node;
     }
     if (fish) {
-        CGFloat deltaX = self.hook.size.width / 2.0;
          self.fishBeingCaught = fish;
         [self raiseHook];
-        
         [fish removeAllActions];
         
         CGFloat rotateAngle = 0.5 * M_PI;
         if (fish.xScale == -1) {
             rotateAngle = -0.5 * M_PI;
             // to offset the hook
-            deltaX = -self.hook.size.width / 2.0;
         }
-        SKAction *fishToHookTranslationAction = [SKAction moveByX:deltaX y:0 duration:0];
+        SKAction *fishToHookTranslationAction = [SKAction moveTo:self.hook.position duration:0];
         SKAction *fishToHookRotationAction = [SKAction rotateByAngle:rotateAngle duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
         SKAction *fishToHookAction = [SKAction group:@[fishToHookTranslationAction, fishToHookRotationAction]];
         SKAction *followHookOnceAction = [SKAction moveByX:0 y:20 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
