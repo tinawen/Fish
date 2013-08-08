@@ -7,13 +7,30 @@
 //
 
 #import "FishingAppDelegate.h"
+#import <Dropbox/Dropbox.h>
 
 @implementation FishingAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    DBAccountManager *mgr =
+    [[DBAccountManager alloc] initWithAppKey:@"3vlq3ku9ut4lisf" secret:@"p73ho4ee68uxxyo"];
+	[DBAccountManager setSharedManager:mgr];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+	UIViewController *root = [storyboard instantiateInitialViewController];
+	self.window.rootViewController = root;
+    
+    [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+	
+	[[DBAccountManager sharedManager] handleOpenURL:url];
+	
+	return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

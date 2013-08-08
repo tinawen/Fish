@@ -71,8 +71,8 @@ static UIColor *colorWithHexString(NSString *hexString);
     if (newFileName.length > 23) {
         newFileName = [newFileName substringToIndex:23];
     }
-    DBRecord *updated_record = [[self table] getRecord:[NSString stringWithFormat:@"%@_updated", newFileName] error:nil];
-    DBRecord *original_record = [[self table] getRecord:[NSString stringWithFormat:@"%@_original", newFileName] error:nil];
+    DBRecord *updated_record = [[self table] getOrInsertRecord:[NSString stringWithFormat:@"%@_updated", newFileName] fields:nil inserted:nil error:nil];
+    DBRecord *original_record = [[self table] getOrInsertRecord:[NSString stringWithFormat:@"%@_original", newFileName] fields:nil inserted:nil error:nil];
     
     for (NSString *key in [self.themeDictionary allKeys]) {
         NSString *newKey = key;

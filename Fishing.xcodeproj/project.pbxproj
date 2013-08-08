@@ -23,9 +23,8 @@
 		260CDC3D17B224EF00B13974 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260CDC1817B224EF00B13974 /* UIKit.framework */; };
 		260CDC4517B224EF00B13974 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 260CDC4317B224EF00B13974 /* InfoPlist.strings */; };
 		260CDC4717B224EF00B13974 /* FishingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 260CDC4617B224EF00B13974 /* FishingTests.m */; };
-		260CDC5B17B22BAB00B13974 /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 260CDC5A17B22BAB00B13974 /* fish.atlas */; };
+		26422D0917B35DAF009CFB5C /* fish1.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26422D0817B35DAF009CFB5C /* fish1.atlas */; };
 		264AA47817B235DF0089D1BC /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 264AA47617B235DF0089D1BC /* MyParticle.sks */; };
-		266FB7AC17B2B085007BC72F /* environment.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 266FB7AB17B2B085007BC72F /* environment.atlas */; };
 		266FB7B017B2B1DE007BC72F /* FishingMyScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 266FB7AF17B2B1DE007BC72F /* FishingMyScene.plist */; };
 		266FB7B917B2B21E007BC72F /* VSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FB7B617B2B21E007BC72F /* VSTheme.m */; };
 		266FB7BA17B2B21E007BC72F /* VSThemeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FB7B817B2B21E007BC72F /* VSThemeLoader.m */; };
@@ -35,6 +34,14 @@
 		266FB7C317B2B2D7007BC72F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 266FB7C217B2B2D7007BC72F /* SystemConfiguration.framework */; };
 		266FB7C517B2B2E0007BC72F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 266FB7C417B2B2E0007BC72F /* QuartzCore.framework */; };
 		266FB7C717B2B2EC007BC72F /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 266FB7C617B2B2EC007BC72F /* libc++.dylib */; };
+		266FB7CA17B2D58A007BC72F /* FishingThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FB7C917B2D58A007BC72F /* FishingThemeManager.m */; };
+		2694721E17B369BE00FF2FD4 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2694721D17B369BE00FF2FD4 /* bg.png */; };
+		26D43A0A17B3663500860D9E /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0517B3663500860D9E /* boat.png */; };
+		26D43A0B17B3663500860D9E /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0617B3663500860D9E /* bubble.png */; };
+		26D43A0C17B3663500860D9E /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0717B3663500860D9E /* cloud.png */; };
+		26D43A0D17B3663500860D9E /* hook.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0817B3663500860D9E /* hook.png */; };
+		26D43A0E17B3663500860D9E /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0917B3663500860D9E /* sun.png */; };
+		26D43A1017B3666000860D9E /* waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0F17B3666000860D9E /* waves.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,9 +77,8 @@
 		260CDC4217B224EF00B13974 /* FishingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FishingTests-Info.plist"; sourceTree = "<group>"; };
 		260CDC4417B224EF00B13974 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		260CDC4617B224EF00B13974 /* FishingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishingTests.m; sourceTree = "<group>"; };
-		260CDC5A17B22BAB00B13974 /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
+		26422D0817B35DAF009CFB5C /* fish1.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish1.atlas; sourceTree = "<group>"; };
 		264AA47617B235DF0089D1BC /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
-		266FB7AB17B2B085007BC72F /* environment.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = environment.atlas; sourceTree = "<group>"; };
 		266FB7AF17B2B1DE007BC72F /* FishingMyScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FishingMyScene.plist; sourceTree = "<group>"; };
 		266FB7B517B2B21E007BC72F /* VSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTheme.h; sourceTree = "<group>"; };
 		266FB7B617B2B21E007BC72F /* VSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTheme.m; sourceTree = "<group>"; };
@@ -84,6 +90,15 @@
 		266FB7C217B2B2D7007BC72F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		266FB7C417B2B2E0007BC72F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		266FB7C617B2B2EC007BC72F /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		266FB7C817B2D58A007BC72F /* FishingThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishingThemeManager.h; sourceTree = "<group>"; };
+		266FB7C917B2D58A007BC72F /* FishingThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishingThemeManager.m; sourceTree = "<group>"; };
+		2694721D17B369BE00FF2FD4 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		26D43A0517B3663500860D9E /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boat.png; sourceTree = "<group>"; };
+		26D43A0617B3663500860D9E /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
+		26D43A0717B3663500860D9E /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
+		26D43A0817B3663500860D9E /* hook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hook.png; sourceTree = "<group>"; };
+		26D43A0917B3663500860D9E /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
+		26D43A0F17B3666000860D9E /* waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waves.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +180,8 @@
 				260CDC2E17B224EF00B13974 /* FishingMyScene.h */,
 				260CDC2F17B224EF00B13974 /* FishingMyScene.m */,
 				266FB7AF17B2B1DE007BC72F /* FishingMyScene.plist */,
+				266FB7C817B2D58A007BC72F /* FishingThemeManager.h */,
+				266FB7C917B2D58A007BC72F /* FishingThemeManager.m */,
 				260CDC3317B224EF00B13974 /* Images.xcassets */,
 				260CDC1D17B224EF00B13974 /* Supporting Files */,
 			);
@@ -174,9 +191,15 @@
 		260CDC1D17B224EF00B13974 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				26D43A0517B3663500860D9E /* boat.png */,
+				26D43A0617B3663500860D9E /* bubble.png */,
+				26D43A0717B3663500860D9E /* cloud.png */,
+				26D43A0F17B3666000860D9E /* waves.png */,
+				2694721D17B369BE00FF2FD4 /* bg.png */,
+				26D43A0817B3663500860D9E /* hook.png */,
+				26D43A0917B3663500860D9E /* sun.png */,
+				26422D0817B35DAF009CFB5C /* fish1.atlas */,
 				264AA47617B235DF0089D1BC /* MyParticle.sks */,
-				266FB7AB17B2B085007BC72F /* environment.atlas */,
-				260CDC5A17B22BAB00B13974 /* fish.atlas */,
 				260CDC1E17B224EF00B13974 /* Fishing-Info.plist */,
 				260CDC1F17B224EF00B13974 /* InfoPlist.strings */,
 				260CDC2217B224EF00B13974 /* main.m */,
@@ -301,13 +324,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2694721E17B369BE00FF2FD4 /* bg.png in Resources */,
+				26D43A0E17B3663500860D9E /* sun.png in Resources */,
 				266FB7B017B2B1DE007BC72F /* FishingMyScene.plist in Resources */,
+				26D43A1017B3666000860D9E /* waves.png in Resources */,
+				26D43A0D17B3663500860D9E /* hook.png in Resources */,
+				26D43A0A17B3663500860D9E /* boat.png in Resources */,
+				26D43A0B17B3663500860D9E /* bubble.png in Resources */,
+				26422D0917B35DAF009CFB5C /* fish1.atlas in Resources */,
+				26D43A0C17B3663500860D9E /* cloud.png in Resources */,
 				260CDC2117B224EF00B13974 /* InfoPlist.strings in Resources */,
 				264AA47817B235DF0089D1BC /* MyParticle.sks in Resources */,
 				260CDC3417B224EF00B13974 /* Images.xcassets in Resources */,
 				260CDC2A17B224EF00B13974 /* Main.storyboard in Resources */,
-				260CDC5B17B22BAB00B13974 /* fish.atlas in Resources */,
-				266FB7AC17B2B085007BC72F /* environment.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				266FB7CA17B2D58A007BC72F /* FishingThemeManager.m in Sources */,
 				260CDC2317B224EF00B13974 /* main.m in Sources */,
 				260CDC2D17B224EF00B13974 /* FishingViewController.m in Sources */,
 				260CDC2717B224EF00B13974 /* FishingAppDelegate.m in Sources */,
