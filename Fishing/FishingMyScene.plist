@@ -4,6 +4,18 @@
 <dict>
 	<key>Default</key>
 	<dict>
+		<key>percentComingFromLeft</key>
+		<integer>50</integer>
+		<key>fishToSharkFrequency</key>
+		<integer>10</integer>
+		<key>fishToWhaleFrequency</key>
+		<integer>50</integer>
+		<key>sharkMouthHitTargetRadius</key>
+		<integer>6</integer>
+		<key>whaleMouthHitTargetRadius</key>
+		<integer>6</integer>
+		<key>fishMouthHitTargetRadius</key>
+		<integer>6</integer>
 		<key>hookRaisingSpeed</key>
 		<integer>2</integer>
 		<key>hookDroppingSpeed</key>

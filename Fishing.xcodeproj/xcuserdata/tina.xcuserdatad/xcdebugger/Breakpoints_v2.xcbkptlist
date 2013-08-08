@@ -52,11 +52,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fishing/FishingMyScene.m"
-            timestampString = "397653758.631039"
+            timestampString = "397691286.437643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-didBeginContact:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fishing/FishingMyScene.m"
+            timestampString = "397691286.437643"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "-didBeginContact:"
             landmarkType = "5">
          </BreakpointContent>
