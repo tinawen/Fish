@@ -13,6 +13,7 @@
 
 const uint32_t HOOK = 0x1 << 0;
 const uint32_t FISHIES = 0x1 << 1;
+const uint32_t BOUND = 0x1 << 2;
 
 @interface FishingMyScene() <SKPhysicsContactDelegate>
 @property (nonatomic, strong) NSMutableArray *fishArray;
@@ -23,7 +24,7 @@ const uint32_t FISHIES = 0x1 << 1;
 @property (nonatomic, strong) SKSpriteNode *hook;
 @property (nonatomic, strong) SKSpriteNode *hookPhysicsNode;
 @property (nonatomic, strong) SKSpriteNode *boat;
-@property (nonatomic) BOOL canHookFish;
+@property (nonatomic, strong) SKSpriteNode *fishBeingCaught;
 @end
 
 @implementation FishingMyScene
@@ -44,10 +45,11 @@ const uint32_t FISHIES = 0x1 << 1;
         [self addChild:sky];
         
         SKSpriteNode *cloud = [SKSpriteNode spriteNodeWithImageNamed:@"cloud"];
-        cloud.position = CGPointMake(-100, self.frame.size.height - cloud.size.height);
+        cloud.position = CGPointMake(-100, self.frame.size.height - cloud.size.height - 10);
         cloud.anchorPoint = CGPointZero;
         [self addChild:cloud];
-        SKAction *cloudMoveRightAction = [SKAction moveByX:self.frame.size.width+100 y:0 duration:5];
+        
+        SKAction *cloudMoveRightAction = [SKAction moveByX:self.frame.size.width+100 y:0 duration:10];
         SKAction *cloudResetAction = [SKAction moveByX:-self.frame.size.width-100 y:0 duration:0];
         SKAction *cloudAction = [SKAction repeatActionForever:[SKAction sequence:@[cloudMoveRightAction, cloudResetAction]]];
         [cloud runAction:cloudAction];
@@ -99,20 +101,24 @@ const uint32_t FISHIES = 0x1 << 1;
     //    self.hook.zPosition = 100;
         self.hook.position = CGPointMake(self.boat.frame.origin.x + 5, CGRectGetMaxY(self.frame) - 53);
         [self addChild:self.hook];
-        SKPhysicsBody *hookPhysicsBody = [SKPhysicsBody bodyWithCircleOfRadius:3];
+        SKPhysicsBody *hookPhysicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(4, 4)];
         self.hookPhysicsNode = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(4, 4)];
         self.hookPhysicsNode.position = CGPointMake(self.hook.position.x + 8, self.hook.position.y - 10);
         [self addChild:self.hookPhysicsNode];
         hookPhysicsBody.categoryBitMask = HOOK;
-        hookPhysicsBody.collisionBitMask = 0;
-        hookPhysicsBody.contactTestBitMask = FISHIES;
+        hookPhysicsBody.collisionBitMask = BOUND;
+        hookPhysicsBody.contactTestBitMask = FISHIES | BOUND;
         self.hookPhysicsNode.physicsBody = hookPhysicsBody;
-        self.canHookFish = YES;
         
         self.hookLine = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(3, 0)];
         self.hookLine.position = CGPointMake(self.boat.frame.origin.x, self.boat.frame.origin.y + self.boat.frame.size.height);
         [self addChild:self.hookLine];
         
+        SKPhysicsBody *boundPhysicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0, 0, self.frame.size.width, 0.90 * self.frame.size.height)];
+        boundPhysicsBody.categoryBitMask = BOUND;
+        boundPhysicsBody.collisionBitMask = HOOK;
+        boundPhysicsBody.contactTestBitMask = HOOK;
+        self.physicsBody = boundPhysicsBody;
     }
     return self;
 }
@@ -127,7 +133,6 @@ const uint32_t FISHIES = 0x1 << 1;
     [self.fishArray addObject:fish];
     
     fish.position = fishLocation;
-//    fish.anchorPoint = CGPointMake(0, CGRectGetMidY(fish.frame));
     [self addChild:fish];
     
     SKSpriteNode *fishPhysicsNode = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(4, 4)];
@@ -166,37 +171,69 @@ const uint32_t FISHIES = 0x1 << 1;
     [NSTimer scheduledTimerWithTimeInterval:[self.theme floatForKey:@"fishGenerationInterval"] target:self selector:@selector(generateRandomFish) userInfo:nil repeats:NO];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    // add hook
-    CGPoint hookDefaultPosition = CGPointMake(self.boat.frame.origin.x, CGRectGetMaxY(self.frame) - 50);
-    self.hook.position = hookDefaultPosition;
-    self.hookPhysicsNode.position = CGPointMake(self.hook.position.x + 15, self.hook.position.y - 16);
-    SKAction *hookGoingDownAction = [SKAction moveByX:0 y:-1 * self.frame.size.height+50 duration:2];
-    SKAction *hookGoingUpAction = [SKAction moveTo:hookDefaultPosition duration:2];
-    SKAction *hookAction = [SKAction sequence:@[hookGoingDownAction, hookGoingUpAction]];
-    [self.hook runAction:hookAction];
-    [self.hookPhysicsNode runAction:hookAction];
-    
-    
-    SKAction *hookLineGoingDownXAction = [SKAction moveByX:0 y:(-1 * self.frame.size.height+50)/2 duration:2];
-    SKAction *hookLineGoingDownScaleAction = [SKAction resizeToHeight:self.frame.size.height - 50 duration:2];
-    SKAction *hookLineGoingDownAction = [SKAction group:@[hookLineGoingDownXAction, hookLineGoingDownScaleAction]];
-    SKAction *hookLineGoingUpXAction = [SKAction moveByX:0 y:(self.frame.size.height - 50) /2 duration:2];
-    SKAction *hookLineGoingUpScaleAction = [SKAction resizeToHeight:0 duration:2];
-    SKAction *hookLineGoingUpAction = [SKAction group:@[hookLineGoingUpXAction, hookLineGoingUpScaleAction]];
-    SKAction *hookLineAction = [SKAction sequence:@[hookLineGoingDownAction, hookLineGoingUpAction]];
-    [self.hookLine runAction:hookLineAction];
+- (void)dropHook {
+    [self.hook removeAllActions];
+    [self.hookPhysicsNode removeAllActions];
+    SKAction *hookGoingDownOnceAction = [SKAction moveByX:0 y:-20 duration:0.5];
+    SKAction *hookGoingDownAction = [SKAction repeatActionForever:hookGoingDownOnceAction];
+    [self.hook runAction:hookGoingDownAction];
+    [self.hookPhysicsNode runAction:hookGoingDownAction];
 }
 
--(void)update:(CFTimeInterval)currentTime {
-    /* Called before each frame is rendered */
+- (void)raiseHook {
+    [self.hook removeAllActions];
+    [self.hookPhysicsNode removeAllActions];
+    SKAction *hookGoingUpOnceAction = [SKAction moveByX:0 y:20 duration:0.5];
+    SKAction *hookGoingUpAction = [SKAction repeatActionForever:hookGoingUpOnceAction];
+    [self.hook runAction:hookGoingUpAction];
+    [self.hookPhysicsNode runAction:hookGoingUpAction];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.fishBeingCaught)
+        return;
+    [self dropHook];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.fishBeingCaught)
+        return;
+
+    [self raiseHook];
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact {
-    if (!self.canHookFish)
-        return;
-    SKSpriteNode *fish = nil;
     
+    // wall collision
+    if ((contact.bodyA.node == self.scene && contact.bodyB.node == self.hookPhysicsNode) ||
+        (contact.bodyB.node == self.scene && contact.bodyA.node == self.hookPhysicsNode)) {
+        [self.hook removeAllActions];
+        [self.hookPhysicsNode removeAllActions];
+        if (contact.contactPoint.y > 0.7 * self.frame.size.height) {
+            if (self.fishBeingCaught) {
+                [self.fishBeingCaught removeAllActions];
+
+                SKAction *fishThrownAwayTraslateAction = [SKAction moveByX:100 y:100 duration:0.5];
+                SKAction *fishThrownAwayRotateAction = [SKAction rotateByAngle:-M_PI duration:0.5];
+                SKAction *fishThrownAwayAction = [SKAction group:@[fishThrownAwayTraslateAction, fishThrownAwayRotateAction]];
+                [self.fishBeingCaught runAction:fishThrownAwayAction completion:^{
+                    [self.fishBeingCaught removeFromParent];
+                    NSUInteger index = [self.fishArray indexOfObject:self.fishBeingCaught];
+                    if (index != NSNotFound) {
+                        [self.fishArray removeObjectAtIndex:index];
+                        [self.fishPhysicsArray removeObjectAtIndex:index];
+                    }
+                    self.fishBeingCaught = nil;
+                }];
+            }
+
+        }
+        return;
+    }
+    if (self.fishBeingCaught)
+        return;
+    
+    SKSpriteNode *fish = nil;
     NSUInteger index = [self.fishPhysicsArray indexOfObject:contact.bodyA.node];
     if (index != NSNotFound) {
         fish = [self.fishArray objectAtIndex:index];
@@ -211,42 +248,22 @@ const uint32_t FISHIES = 0x1 << 1;
         }
     }
     if (fish) {
-        self.canHookFish = NO;
-        CGFloat fullWidth = CGRectGetMaxY(self.frame);
-        CGFloat duration = (fullWidth - self.hook.position.y) / fullWidth * 3.0;
-        SKAction *hookAction = [SKAction moveTo:CGPointMake(self.boat.frame.origin.x, CGRectGetMaxY(self.frame) - 50) duration:duration];
-        [fish removeAllActions];
-        [self.hook removeAllActions];
-        [self.hook runAction:hookAction];
-        
-        [self.hookPhysicsNode runAction:hookAction];
-        [self.hookLine removeAllActions];
-        SKAction *hookLineGoingUpXAction = [SKAction moveTo:CGPointMake(self.boat.frame.origin.x, self.boat.frame.origin.y + self.boat.frame.size.height) duration:duration];
-        SKAction *hookLineGoingUpScaleAction = [SKAction resizeToHeight:0 duration:duration];
-        SKAction *hookLineGoingUpAction = [SKAction group:@[hookLineGoingUpXAction, hookLineGoingUpScaleAction]];
-        [self.hookLine runAction:hookLineGoingUpAction];
-
+        self.fishBeingCaught = fish;
+        [self raiseHook];
         
         fish.position = CGPointMake(CGRectGetMidX(self.frame), self.hookPhysicsNode.position.y - 5);
+        [fish removeAllActions];
         
         CGFloat rotateAngle = 0.5 * M_PI;
         if (fish.xScale == -1) {
             rotateAngle = -0.5 * M_PI;
         }
-        SKAction *followHookAction = [SKAction moveTo:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame) - 65) duration:duration];
+        SKAction *followHookOnceAction = [SKAction moveByX:0 y:20 duration:0.5];
+        SKAction *followHookAction = [SKAction repeatActionForever:followHookOnceAction];
         SKAction *rotateFishAction = [SKAction rotateByAngle:rotateAngle duration:0.5];
         SKAction *fishActions = [SKAction group:@[rotateFishAction, followHookAction]];
-        [fish runAction:fishActions completion:^{
-            fish.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:fish.size];
-            fish.physicsBody.allowsRotation = YES;
-            [fish.physicsBody applyImpulse:CGPointMake(5, 20) atPoint:CGPointMake(fish.frame.origin.x, fish.frame.origin.y)];
-            [fish runAction:[SKAction waitForDuration:1] completion:^{
-                fish.physicsBody = NULL;
-                [fish removeFromParent];
-                [self.fishArray removeObject:fish];
-                self.canHookFish = YES;
-            }];
-        }];
+        [fish runAction:fishActions];
+        
     }
 }
 - (void)didEndContact:(SKPhysicsContact *)contact {
