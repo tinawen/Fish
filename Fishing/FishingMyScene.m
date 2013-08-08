@@ -130,7 +130,7 @@ NSUInteger WHALETYPE = 2;
         hookPhysicsBody.usesPreciseCollisionDetection = YES;
         self.hook.physicsBody = hookPhysicsBody;
         
-        self.hookLine = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(4, 3)];
+        self.hookLine = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(3, 3)];
         self.hookLine.anchorPoint = CGPointMake(0.5, 1.0);
         self.hookLine.position = CGPointMake(self.hook.position.x - 4, self.hook.position.y + self.hook.size.height);
         [self addChild:self.hookLine];
@@ -216,11 +216,11 @@ NSUInteger WHALETYPE = 2;
 
 - (void)dropHook {
     [self.hook removeAllActions];
+    [self.hookLine removeAllActions];
      SKAction *hookGoingDownOnceAction = [SKAction moveByX:0 y:-20 duration:1/[self.theme floatForKey:@"hookDroppingSpeed"]];
     SKAction *hookGoingDownAction = [SKAction repeatActionForever:hookGoingDownOnceAction];
     [self.hook runAction:hookGoingDownAction];
     SKAction *hookLineOnceAction = [SKAction resizeByWidth:0 height:20 duration:1/[self.theme floatForKey:@"hookDroppingSpeed"]];
-
     SKAction *hookLineAction = [SKAction repeatActionForever:hookLineOnceAction];
     [self.hookLine runAction:hookLineAction];
 }
@@ -301,7 +301,7 @@ NSUInteger WHALETYPE = 2;
             // to offset the hook
             deltaX = -self.hook.size.width / 2.0;
         }
-        SKAction *fishToHookTranslationAction = [SKAction moveByX:deltaX y:0 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
+        SKAction *fishToHookTranslationAction = [SKAction moveByX:deltaX y:0 duration:0];
         SKAction *fishToHookRotationAction = [SKAction rotateByAngle:rotateAngle duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
         SKAction *fishToHookAction = [SKAction group:@[fishToHookTranslationAction, fishToHookRotationAction]];
         SKAction *followHookOnceAction = [SKAction moveByX:0 y:20 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
