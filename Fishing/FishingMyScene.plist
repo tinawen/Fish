@@ -4,7 +4,17 @@
 <dict>
 	<key>Default</key>
 	<dict>
-		<key>fishGenerationInterval</key>
+		<key>hookRaisingSpeed</key>
+		<integer>2</integer>
+		<key>hookDroppingSpeed</key>
+		<integer>2</integer>
+		<key>fishSwimmingSpeed</key>
+		<real>12.5</real>
+		<key>whaleSwimmingSpeed</key>
+		<integer>4</integer>
+		<key>sharkSwimmingSpeed</key>
+		<integer>8</integer>
+		<key>fishDensity</key>
 		<integer>1</integer>
 	</dict>
 </dict>

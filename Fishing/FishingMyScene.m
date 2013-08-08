@@ -15,10 +15,17 @@ const uint32_t HOOK = 0x1 << 0;
 const uint32_t FISHIES = 0x1 << 1;
 const uint32_t BOUND = 0x1 << 2;
 
+NSUInteger FISHTYPE = 0;
+NSUInteger SHARKTYPE = 1;
+NSUInteger WHALETYPE = 2;
+
 @interface FishingMyScene() <SKPhysicsContactDelegate>
+@property (nonatomic, strong) NSMutableArray *fishTypeArray;
 @property (nonatomic, strong) NSMutableArray *fishArray;
 @property (nonatomic, strong) NSMutableArray *fishPhysicsArray;
 @property (nonatomic, strong) NSArray *fishSwim;
+@property (nonatomic, strong) NSArray *sharkSwim;
+@property (nonatomic, strong) NSArray *whaleSwim;
 @property (nonatomic, strong) VSTheme *theme;
 @property (nonatomic, strong) SKSpriteNode *hookLine;
 @property (nonatomic, strong) SKSpriteNode *hook;
@@ -90,15 +97,32 @@ const uint32_t BOUND = 0x1 << 2;
             [fishSwimmingFrames addObject:[animAtlas textureNamed:tex]];
         }
         _fishSwim = fishSwimmingFrames;
+        
+        NSMutableArray *sharkSwimmingFrames = [NSMutableArray array];
+        SKTextureAtlas *sharkAnimAtlas = [SKTextureAtlas atlasNamed:@"shark"];
+        for (int i = 1; i < sharkAnimAtlas.textureNames.count; ++i) {
+            NSString *tex = [NSString stringWithFormat:@"s%02d", i];
+            [sharkSwimmingFrames addObject:[sharkAnimAtlas textureNamed:tex]];
+        }
+        _sharkSwim = sharkSwimmingFrames;
+
+        NSMutableArray *whaleSwimmingFrames = [NSMutableArray array];
+        SKTextureAtlas *whaleAnimAtlas = [SKTextureAtlas atlasNamed:@"whale"];
+        for (int i = 1; i < whaleAnimAtlas.textureNames.count; ++i) {
+            NSString *tex = [NSString stringWithFormat:@"s%02d", i];
+            [whaleSwimmingFrames addObject:[whaleAnimAtlas textureNamed:tex]];
+        }
+        _whaleSwim = whaleSwimmingFrames;
+        
         _fishArray = [[NSMutableArray alloc] init];
         _fishPhysicsArray = [[NSMutableArray alloc] init];
+        _fishTypeArray = [[NSMutableArray alloc] init];
         
         self.physicsWorld.gravity = CGPointMake(0, 0);
         self.physicsWorld.contactDelegate = self;
         [self generateRandomFish];
         
         self.hook = [SKSpriteNode spriteNodeWithImageNamed:@"hook"];
-    //    self.hook.zPosition = 100;
         self.hook.position = CGPointMake(self.boat.frame.origin.x + 5, CGRectGetMaxY(self.frame) - 53);
         [self addChild:self.hook];
         SKPhysicsBody *hookPhysicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(4, 4)];
@@ -124,22 +148,49 @@ const uint32_t BOUND = 0x1 << 2;
 }
 
 - (void)generateRandomFish {
+    
+    //fish type
+    NSUInteger fishType = arc4random() % 50;
+    NSArray *swim = self.fishSwim;
+    CGFloat yRange = 0.75;
+    CGFloat duration = 100.0/[self.theme floatForKey:@"fishSwimmingSpeed"];
+    CGFloat fishMouthXOffset = 15;
+    CGFloat fishMouthYOffset = 0;
+    NSUInteger fishTypeNum = FISHTYPE;
+    if (fishType == 0) {
+        swim = self.whaleSwim;
+        yRange = 0.2;
+        duration = 100.0/[self.theme floatForKey:@"whaleSwimmingSpeed"];
+        fishMouthXOffset = 105;
+        fishMouthYOffset = 30;
+        fishTypeNum = WHALETYPE;
+    } else if (fishType % 10 == 0) {
+        swim = self.sharkSwim;
+        yRange = 0.6;
+        duration = 100.0/[self.theme floatForKey:@"sharkSwimmingSpeed"];
+        fishMouthXOffset = 56;
+        fishMouthYOffset = 8;
+        fishTypeNum = SHARKTYPE;
+    }
+    SKSpriteNode *fish = [SKSpriteNode spriteNodeWithTexture:[swim firstObject]];
+    [self.fishArray addObject:fish];
+    [self.fishTypeArray addObject:@(fishTypeNum)];
+    
     BOOL goingRight = arc4random() % 2 == 0;
-    CGFloat x = goingRight ? -50 : self.frame.size.width + 50;
-    int yInt = arc4random() % (int)(self.frame.size.height * 0.75);
+    CGFloat x = goingRight ? -125 : self.frame.size.width + 125;
+    CGFloat yOffset = [swim[0] size].height / 2;
+    int yInt = arc4random() % (int)((self.frame.size.height - yOffset) * yRange) + yOffset;
     CGFloat y = (CGFloat)yInt;
     CGPoint fishLocation = CGPointMake(x, y);
-    SKSpriteNode *fish = [SKSpriteNode spriteNodeWithTexture:[self.fishSwim firstObject]];
-    [self.fishArray addObject:fish];
     
     fish.position = fishLocation;
     [self addChild:fish];
     
     SKSpriteNode *fishPhysicsNode = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(4, 4)];
     if (goingRight) {
-        fishPhysicsNode.position = CGPointMake(fish.position.x + 15, fish.position.y);
+        fishPhysicsNode.position = CGPointMake(fish.position.x + fishMouthXOffset, fish.position.y - fishMouthYOffset);
     } else {
-        fishPhysicsNode.position = CGPointMake(fish.position.x - 15, fish.position.y);
+        fishPhysicsNode.position = CGPointMake(fish.position.x - fishMouthXOffset, fish.position.y - fishMouthYOffset);
     }
     [self addChild:fishPhysicsNode];
     fishPhysicsNode.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:6];
@@ -149,32 +200,36 @@ const uint32_t BOUND = 0x1 << 2;
     [self.fishPhysicsArray addObject:fishPhysicsNode];
     
     const NSTimeInterval kFishAnimSpeed = 1 / 5.0;
-    SKAction *fishSwimmingAction = [SKAction animateWithTextures:self.fishSwim timePerFrame:kFishAnimSpeed];
+    SKAction *fishSwimmingAction = [SKAction animateWithTextures:swim timePerFrame:kFishAnimSpeed];
     SKAction *fishSwimmingForeverAction = [SKAction repeatActionForever:fishSwimmingAction];
     
     [fish runAction:fishSwimmingForeverAction];
 
-    SKAction *fishMoveAction = goingRight ? [SKAction moveByX:self.frame.size.width + 100 y:0 duration:4] : [SKAction moveByX:-1 * (self.frame.size.width + 100) y:0 duration:4];
+    SKAction *fishMoveAction = goingRight ? [SKAction moveByX:self.frame.size.width + 250 y:0 duration:duration] : [SKAction moveByX:-1 * (self.frame.size.width + 250) y:0 duration:duration];
     if (!goingRight) {
         fish.xScale = -1;
     }
     __weak NSMutableArray *fishArray = self.fishArray;
     [fish runAction:fishMoveAction completion:^{
         [fish removeFromParent];
-        [fishArray removeObject:fish];
+        NSUInteger index = [fishArray indexOfObject:fish];
+        if (index != NSNotFound) {
+            [fishArray removeObjectAtIndex:index];
+            [self.fishTypeArray removeObjectAtIndex:index];
+        }
     }];
     __weak NSMutableArray *fishPhysicsArray = self.fishPhysicsArray;
     [fishPhysicsNode runAction:fishMoveAction completion:^{
         [fishPhysicsNode removeFromParent];
         [fishPhysicsArray removeObject:fishPhysicsNode];
     }];
-    [NSTimer scheduledTimerWithTimeInterval:[self.theme floatForKey:@"fishGenerationInterval"] target:self selector:@selector(generateRandomFish) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1/[self.theme floatForKey:@"fishDensity"] target:self selector:@selector(generateRandomFish) userInfo:nil repeats:NO];
 }
 
 - (void)dropHook {
     [self.hook removeAllActions];
     [self.hookPhysicsNode removeAllActions];
-    SKAction *hookGoingDownOnceAction = [SKAction moveByX:0 y:-20 duration:0.5];
+    SKAction *hookGoingDownOnceAction = [SKAction moveByX:0 y:-20 duration:1/[self.theme floatForKey:@"hookDroppingSpeed"]];
     SKAction *hookGoingDownAction = [SKAction repeatActionForever:hookGoingDownOnceAction];
     [self.hook runAction:hookGoingDownAction];
     [self.hookPhysicsNode runAction:hookGoingDownAction];
@@ -183,7 +238,7 @@ const uint32_t BOUND = 0x1 << 2;
 - (void)raiseHook {
     [self.hook removeAllActions];
     [self.hookPhysicsNode removeAllActions];
-    SKAction *hookGoingUpOnceAction = [SKAction moveByX:0 y:20 duration:0.5];
+    SKAction *hookGoingUpOnceAction = [SKAction moveByX:0 y:20 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
     SKAction *hookGoingUpAction = [SKAction repeatActionForever:hookGoingUpOnceAction];
     [self.hook runAction:hookGoingUpAction];
     [self.hookPhysicsNode runAction:hookGoingUpAction];
@@ -210,10 +265,12 @@ const uint32_t BOUND = 0x1 << 2;
         [self.hook removeAllActions];
         [self.hookPhysicsNode removeAllActions];
         if (contact.contactPoint.y > 0.7 * self.frame.size.height) {
+            self.hook.position = CGPointMake(self.boat.frame.origin.x + 5, CGRectGetMaxY(self.frame) - 53);
+            self.hookPhysicsNode.position = CGPointMake(self.hook.position.x + 8, self.hook.position.y - 10);
             if (self.fishBeingCaught) {
                 [self.fishBeingCaught removeAllActions];
 
-                SKAction *fishThrownAwayTraslateAction = [SKAction moveByX:100 y:100 duration:0.5];
+                SKAction *fishThrownAwayTraslateAction = [SKAction moveByX:150 y:150 duration:0.5];
                 SKAction *fishThrownAwayRotateAction = [SKAction rotateByAngle:-M_PI duration:0.5];
                 SKAction *fishThrownAwayAction = [SKAction group:@[fishThrownAwayTraslateAction, fishThrownAwayRotateAction]];
                 [self.fishBeingCaught runAction:fishThrownAwayAction completion:^{
@@ -222,6 +279,7 @@ const uint32_t BOUND = 0x1 << 2;
                     if (index != NSNotFound) {
                         [self.fishArray removeObjectAtIndex:index];
                         [self.fishPhysicsArray removeObjectAtIndex:index];
+                        [self.fishTypeArray removeObjectAtIndex:index];
                     }
                     self.fishBeingCaught = nil;
                 }];
@@ -248,34 +306,27 @@ const uint32_t BOUND = 0x1 << 2;
         }
     }
     if (fish) {
-        self.fishBeingCaught = fish;
+         self.fishBeingCaught = fish;
         [self raiseHook];
         
-        fish.position = CGPointMake(CGRectGetMidX(self.frame), self.hookPhysicsNode.position.y - 5);
+        fish.position = self.hookPhysicsNode.position;
         [fish removeAllActions];
         
         CGFloat rotateAngle = 0.5 * M_PI;
         if (fish.xScale == -1) {
             rotateAngle = -0.5 * M_PI;
         }
-        SKAction *followHookOnceAction = [SKAction moveByX:0 y:20 duration:0.5];
+        SKAction *moveFishAction = [SKAction moveByX:0 y:-fish.size.height duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
+        SKAction *rotateFishAction = [SKAction rotateByAngle:rotateAngle duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
+        SKAction *fishToHookAction = [SKAction group:@[rotateFishAction, moveFishAction]];
+        SKAction *followHookOnceAction = [SKAction moveByX:0 y:20 duration:1/[self.theme floatForKey:@"hookRaisingSpeed"]];
         SKAction *followHookAction = [SKAction repeatActionForever:followHookOnceAction];
-        SKAction *rotateFishAction = [SKAction rotateByAngle:rotateAngle duration:0.5];
-        SKAction *fishActions = [SKAction group:@[rotateFishAction, followHookAction]];
+        SKAction *fishActions = [SKAction group:@[fishToHookAction, followHookAction]];
         [fish runAction:fishActions];
         
     }
 }
 - (void)didEndContact:(SKPhysicsContact *)contact {
-    SKSpriteNode *fish = nil;
-    if ([self.fishArray containsObject:contact.bodyA.node]) {
-        fish = (SKSpriteNode *)contact.bodyA.node;
-    } else if ([self.fishArray containsObject:contact.bodyB.node]) {
-        fish = (SKSpriteNode *)contact.bodyB.node;
-    }
-    if (fish) {
-        fish.colorBlendFactor = 0;
-    }
 
 }
 @end
