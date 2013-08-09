@@ -4,8 +4,12 @@
 <dict>
 	<key>Default</key>
 	<dict>
+		<key>gameOver</key>
+		<integer>0</integer>
 		<key>fishDensity</key>
 		<integer>1</integer>
+		<key>shouldShowEasterEgg</key>
+		<integer>0</integer>
 		<key>percentComingFromLeft</key>
 		<integer>50</integer>
 		<key>fishToSharkFrequency</key>
