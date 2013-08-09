@@ -40,6 +40,8 @@ NSInteger WHALETYPE = 2;
 @property (nonatomic) BOOL gameIsOver;
 @property (nonatomic, strong) SKSpriteNode *sky;
 @property (nonatomic, strong) NSTimer *gameOverTimer;
+@property (nonatomic, strong) NSString *fishermanImageName;
+@property (nonatomic, strong) SKSpriteNode *fisherMan;
 @end
 
 @implementation FishingMyScene
@@ -74,10 +76,11 @@ NSInteger WHALETYPE = 2;
         self.boat.anchorPoint = CGPointZero;
         [self addChild:self.boat];
         
-        SKSpriteNode *tina = [SKSpriteNode spriteNodeWithImageNamed:@"tina"];
-        tina.position = CGPointMake(self.frame.size.width - 0.53 * self.boat.size.width, 30 + 0.8 * self.frame.size.height);
-        tina.anchorPoint = CGPointZero;
-        [self addChild:tina];
+        _fishermanImageName = [self.theme stringForKey:@"fisherman"];
+        self.fisherMan = [SKSpriteNode spriteNodeWithImageNamed:_fishermanImageName];
+        self.fisherMan.position = CGPointMake(self.frame.size.width - 0.53 * self.boat.size.width, 30 + 0.8 * self.frame.size.height);
+        self.fisherMan.anchorPoint = CGPointZero;
+        [self addChild:self.fisherMan];
         
         self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"HelveticaNeue"];
         self.scoreLabel.fontSize = 16;
@@ -215,10 +218,11 @@ NSInteger WHALETYPE = 2;
 - (void)gameOverAnimation {
     CGFloat angle = [[self.filter valueForKey:@"inputAngle"] floatValue];
     CGFloat radius = [[self.filter valueForKey:@"inputRadius"] floatValue];
-    if (radius > 1000) {
+    if (radius > 1000 || [self.theme floatForKey:@"gameOver"] == 0) {
         [self.gameOverTimer invalidate];
         self.filter = nil;
         self.shouldEnableEffects = NO;
+        self.gameIsOver = NO;
         return;
     }
     
@@ -258,6 +262,23 @@ NSInteger WHALETYPE = 2;
     SKAction *nessieMoveAction = [SKAction moveByX:20 y:deltaY duration:1];
     [self.nessie runAction:nessieMoveAction];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateNessie) userInfo:nil repeats:NO];
+}
+
+- (void)setFishermanImageName:(NSString *)fishermanImageName {
+    if (![_fishermanImageName isEqualToString:fishermanImageName]) {
+        _fishermanImageName = fishermanImageName;
+        SKAction *oldFishermanFadeOut = [SKAction fadeOutWithDuration:0.5];
+        [self.fisherMan runAction:oldFishermanFadeOut completion:^{
+            [self.fisherMan removeFromParent];
+            self.fisherMan = [SKSpriteNode spriteNodeWithImageNamed:fishermanImageName];
+            self.fisherMan.position = CGPointMake(self.frame.size.width - 0.53 * self.boat.size.width, 30 + 0.8 * self.frame.size.height);
+            self.fisherMan.anchorPoint = CGPointZero;
+            self.fisherMan.alpha = 0;
+            [self addChild:self.fisherMan];
+            SKAction *newFishermanFadeIn = [SKAction fadeAlphaBy:1.0 duration:0.5];
+            [self.fisherMan runAction:newFishermanFadeIn];
+        }];
+    }
 }
 
 - (void)setScore:(NSUInteger)score {
@@ -349,6 +370,10 @@ NSInteger WHALETYPE = 2;
     if (!self.gameIsOver && [self.theme floatForKey:@"gameOver"] == 1) {
         self.gameIsOver = YES;
         [self gameOver];
+    }
+  
+    if ([@[@"tina", @"panda"] containsObject:[self.theme stringForKey:@"fisherman"]]) {
+        [self setFishermanImageName:[self.theme stringForKey:@"fisherman"]];
     }
 }
 

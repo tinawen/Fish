@@ -26,6 +26,8 @@
 		2627299517B38ED200E1BAC8 /* whale.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2627299417B38ED200E1BAC8 /* whale.atlas */; };
 		2627299717B38EDA00E1BAC8 /* shark.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2627299617B38EDA00E1BAC8 /* shark.atlas */; };
 		264AA47817B235DF0089D1BC /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 264AA47617B235DF0089D1BC /* MyParticle.sks */; };
+		266CA40F17B57F6900EE53EB /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = 266CA40D17B57F6900EE53EB /* panda.png */; };
+		266CA41017B57F6900EE53EB /* panda@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266CA40E17B57F6900EE53EB /* panda@2x.png */; };
 		266FB7B017B2B1DE007BC72F /* FishingMyScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 266FB7AF17B2B1DE007BC72F /* FishingMyScene.plist */; };
 		266FB7B917B2B21E007BC72F /* VSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FB7B617B2B21E007BC72F /* VSTheme.m */; };
 		266FB7BA17B2B21E007BC72F /* VSThemeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FB7B817B2B21E007BC72F /* VSThemeLoader.m */; };
@@ -110,6 +112,8 @@
 		2627299417B38ED200E1BAC8 /* whale.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = whale.atlas; sourceTree = "<group>"; };
 		2627299617B38EDA00E1BAC8 /* shark.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = shark.atlas; sourceTree = "<group>"; };
 		264AA47617B235DF0089D1BC /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		266CA40D17B57F6900EE53EB /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
+		266CA40E17B57F6900EE53EB /* panda@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "panda@2x.png"; sourceTree = "<group>"; };
 		266FB7AF17B2B1DE007BC72F /* FishingMyScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FishingMyScene.plist; sourceTree = "<group>"; };
 		266FB7B517B2B21E007BC72F /* VSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTheme.h; sourceTree = "<group>"; };
 		266FB7B617B2B21E007BC72F /* VSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTheme.m; sourceTree = "<group>"; };
@@ -256,6 +260,8 @@
 				2627299417B38ED200E1BAC8 /* whale.atlas */,
 				26D43A0517B3663500860D9E /* boat.png */,
 				26E78A7F17B4B16100F44988 /* boat@2x.png */,
+				266CA40D17B57F6900EE53EB /* panda.png */,
+				266CA40E17B57F6900EE53EB /* panda@2x.png */,
 				26E78A9117B4C0BF00F44988 /* tina.png */,
 				26E78A9217B4C0BF00F44988 /* tina@2x.png */,
 				26E78A8917B4BED500F44988 /* app.png */,
@@ -427,6 +433,7 @@
 				26E78A8817B4B1E700F44988 /* hook@2x.png in Resources */,
 				26E78A9B17B4C69C00F44988 /* nessie.png in Resources */,
 				26E78A9417B4C0BF00F44988 /* tina@2x.png in Resources */,
+				266CA41017B57F6900EE53EB /* panda@2x.png in Resources */,
 				26D43A1017B3666000860D9E /* waves.png in Resources */,
 				26E78A8317B4B16100F44988 /* boat@2x.png in Resources */,
 				26E78A9717B4C21D00F44988 /* Sun.sks in Resources */,
@@ -438,6 +445,7 @@
 				26FF68EB17B4D877001A2C60 /* fish.png in Resources */,
 				26D43A0D17B3663500860D9E /* hook.png in Resources */,
 				26F8D93417B4DD5900DF7369 /* sharkLeft.png in Resources */,
+				266CA40F17B57F6900EE53EB /* panda.png in Resources */,
 				26E78A9017B4BFA400F44988 /* small_fish.atlas in Resources */,
 				26E78A7E17B4B13600F44988 /* bubble@2x.png in Resources */,
 				26F946BB17B4DEC300AEC9C2 /* WhaleLeft.sks in Resources */,

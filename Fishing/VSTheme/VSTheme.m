@@ -79,15 +79,15 @@ static UIColor *colorWithHexString(NSString *hexString);
         if (key.length > 32) {
             newKey = [key substringToIndex:32];
         }
-        id originalValue = [original_record objectForKey:newKey];
+   //     id originalValue = [original_record objectForKey:newKey];
         id newValue = [updated_record objectForKey:newKey];
         NSLog(@"new value is %@", newValue);
         if (newValue) {
-            if ([[self.themeDictionary objectForKey:key] isKindOfClass:[NSNumber class]] && ![originalValue isEqual:newValue]) {
+            if ([[self.themeDictionary objectForKey:key] isKindOfClass:[NSNumber class]]) {
                 NSMutableDictionary *newThemeDict = [NSMutableDictionary dictionaryWithDictionary:self.themeDictionary];
                 [newThemeDict setObject:[[[NSNumberFormatter alloc] init] numberFromString:newValue] forKey:key];
                 self.themeDictionary = newThemeDict;
-            } else if ([[self.themeDictionary objectForKey:key] isKindOfClass:[NSString class]] && ![originalValue isEqualToString:newValue]) {
+            } else if ([[self.themeDictionary objectForKey:key] isKindOfClass:[NSString class]]) {
                 NSMutableDictionary *newThemeDict = [NSMutableDictionary dictionaryWithDictionary:self.themeDictionary];
                 [newThemeDict setObject:newValue forKey:key];
                 self.themeDictionary = newThemeDict;

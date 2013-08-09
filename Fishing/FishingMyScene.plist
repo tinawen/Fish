@@ -4,6 +4,8 @@
 <dict>
 	<key>Default</key>
 	<dict>
+		<key>fisherman</key>
+		<string>tina</string>
 		<key>gameOver</key>
 		<integer>0</integer>
 		<key>fishDensity</key>
