@@ -372,7 +372,7 @@ NSInteger WHALETYPE = 2;
         [self gameOver];
     }
   
-    if ([@[@"tina", @"panda"] containsObject:[self.theme stringForKey:@"fisherman"]]) {
+    if ([@[@"tina", @"panda", @"drew"] containsObject:[self.theme stringForKey:@"fisherman"]]) {
         [self setFishermanImageName:[self.theme stringForKey:@"fisherman"]];
     }
 }
