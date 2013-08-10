@@ -16,8 +16,8 @@
 {
     [super viewDidLoad];
 
-    
-    if ([[DBAccountManager sharedManager] linkedAccount]) {
+//    
+//    if ([[DBAccountManager sharedManager] linkedAccount]) {
         // Create and configure the scene.
         // Configure the view.
         SKView * skView = (SKView *)self.view;
@@ -28,28 +28,28 @@
         
         // Present the scene.
         [skView presentScene:scene];
-    } else {
-        [[DBAccountManager sharedManager] linkFromController:self];
-    }
+//    } else {
+//        [[DBAccountManager sharedManager] linkFromController:self];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	if ([[DBAccountManager sharedManager] linkedAccount]) {
-        if ([self.view isKindOfClass:[SKView class]])
-            return;
-        // Configure the view.
-        SKView * skView = (SKView *)self.view;
-        skView.showsFPS = YES;
-        skView.showsNodeCount = YES;
-        // Create and configure the scene.
-        SKScene * scene = [FishingMyScene sceneWithSize:skView.bounds.size];
-        scene.scaleMode = SKSceneScaleModeAspectFill;
-        
-        // Present the scene.
-        [skView presentScene:scene];
-    }
+//	if ([[DBAccountManager sharedManager] linkedAccount]) {
+//        if ([self.view isKindOfClass:[SKView class]])
+//            return;
+//        // Configure the view.
+//        SKView * skView = (SKView *)self.view;
+//        skView.showsFPS = YES;
+//        skView.showsNodeCount = YES;
+//        // Create and configure the scene.
+//        SKScene * scene = [FishingMyScene sceneWithSize:skView.bounds.size];
+//        scene.scaleMode = SKSceneScaleModeAspectFill;
+//        
+//        // Present the scene.
+//        [skView presentScene:scene];
+//    }
 }
 
 

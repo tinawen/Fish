@@ -14,9 +14,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    DBAccountManager *mgr =
-    [[DBAccountManager alloc] initWithAppKey:@"3vlq3ku9ut4lisf" secret:@"p73ho4ee68uxxyo"];
-	[DBAccountManager setSharedManager:mgr];
+//    DBAccountManager *mgr =
+//    [[DBAccountManager alloc] initWithAppKey:@"3vlq3ku9ut4lisf" secret:@"p73ho4ee68uxxyo"];
+//	[DBAccountManager setSharedManager:mgr];
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	UIViewController *root = [storyboard instantiateInitialViewController];

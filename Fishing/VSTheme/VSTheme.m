@@ -52,8 +52,8 @@ static UIColor *colorWithHexString(NSString *hexString);
 	_colorCache = [NSCache new];
 	_fontCache = [NSCache new];
     _fileName = fileName;
-    [self uploadTheme];
-    [self update];
+ //   [self uploadTheme];
+//    [self update];
 
 	return self;
 }

@@ -5,7 +5,7 @@
 	<key>Default</key>
 	<dict>
 		<key>fisherman</key>
-		<string>tina</string>
+		<string>panda</string>
 		<key>gameOver</key>
 		<integer>0</integer>
 		<key>fishDensity</key>
@@ -25,9 +25,9 @@
 		<key>whaleMouthHitTargetRadius</key>
 		<integer>6</integer>
 		<key>hookRaisingSpeed</key>
-		<integer>2</integer>
+		<integer>6</integer>
 		<key>hookDroppingSpeed</key>
-		<integer>2</integer>
+		<integer>3</integer>
 		<key>fishSwimmingSpeed</key>
 		<real>12.5</real>
 		<key>sharkSwimmingSpeed</key>

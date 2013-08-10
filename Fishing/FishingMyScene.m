@@ -19,6 +19,8 @@ NSInteger FISHTYPE = 0;
 NSInteger SHARKTYPE = 1;
 NSInteger WHALETYPE = 2;
 
+const int timeLimit = 60;
+
 @interface FishingMyScene() <SKPhysicsContactDelegate>
 @property (nonatomic, strong) NSMutableArray *fishTypeArray;
 @property (nonatomic, strong) NSMutableArray *fishArray;
@@ -42,6 +44,7 @@ NSInteger WHALETYPE = 2;
 @property (nonatomic, strong) NSTimer *gameOverTimer;
 @property (nonatomic, strong) NSString *fishermanImageName;
 @property (nonatomic, strong) SKSpriteNode *fisherMan;
+@property (nonatomic, strong) NSTimer *gameTimer;
 @end
 
 @implementation FishingMyScene
@@ -90,14 +93,14 @@ NSInteger WHALETYPE = 2;
         //CGPointMake(CGRectGetMaxX(self.frame) - self.size.width, CGRectGetMaxY(self.frame) - self.size.height);
         [self addChild:self.scoreLabel];
         
-//        self.timerLabel = [SKLabelNode labelNodeWithFontNamed:@"HelveticaNeue"];
-//        self.timerLabel.fontSize = 16;
-//        self.timerLabel.fontColor = [SKColor blackColor];
-//        self.startTime = [NSDate date];
-//        [self updateTimer];
-//        self.timerLabel.position = CGPointMake(self.size.width - self.timerLabel.frame.size.width + 14, self.size.height - self.scoreLabel.frame.size.height - self.timerLabel.frame.size.height - 20);
-//        [self addChild:self.timerLabel];
-//        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+        self.timerLabel = [SKLabelNode labelNodeWithFontNamed:@"HelveticaNeue"];
+        self.timerLabel.fontSize = 16;
+        self.timerLabel.fontColor = [SKColor blackColor];
+        self.startTime = [NSDate date];
+        [self updateTimer];
+        self.timerLabel.position = CGPointMake(self.size.width - self.timerLabel.frame.size.width, self.size.height - self.scoreLabel.frame.size.height - self.timerLabel.frame.size.height - 20);
+        [self addChild:self.timerLabel];
+        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
         
         SKEmitterNode *sunEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sun" ofType:@"sks"]];
         sunEmitter.position = CGPointMake(30, self.frame.size.height - 40);
@@ -218,11 +221,17 @@ NSInteger WHALETYPE = 2;
 - (void)gameOverAnimation {
     CGFloat angle = [[self.filter valueForKey:@"inputAngle"] floatValue];
     CGFloat radius = [[self.filter valueForKey:@"inputRadius"] floatValue];
-    if (radius > 1000 || [self.theme floatForKey:@"gameOver"] == 0) {
+  //  if (radius > 1000 || [self.theme floatForKey:@"gameOver"] == 0) {
+    if (radius > 500) {
         [self.gameOverTimer invalidate];
         self.filter = nil;
         self.shouldEnableEffects = NO;
         self.gameIsOver = NO;
+        self.startTime = [NSDate date];
+        self.score = 0;
+        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+        self.timerLabel.text = [NSString stringWithFormat:@":%d", 60];
+        self.timerLabel.hidden = NO;
         return;
     }
     
@@ -283,6 +292,9 @@ NSInteger WHALETYPE = 2;
 
 - (void)setScore:(NSUInteger)score {
     _score = score;
+    if (score == 250) {
+        [self showNessie];
+    }
     self.scoreLabel.text = [NSString stringWithFormat:@"%04d", self.score];
 }
 
@@ -290,7 +302,13 @@ NSInteger WHALETYPE = 2;
     NSTimeInterval duration = [[NSDate date] timeIntervalSinceDate:self.startTime];
     int minutes = floor(duration / 60);
     int seconds = round(duration - minutes * 60);
-    self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+    seconds = timeLimit - seconds;
+    self.timerLabel.text = [NSString stringWithFormat:@":%02d", seconds];
+    if (seconds == 0) {
+        [self.gameTimer invalidate];
+        self.timerLabel.hidden = YES;
+        [self gameOver];
+    }
 }
 
 - (void)generateRandomFish {
