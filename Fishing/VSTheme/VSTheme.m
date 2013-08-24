@@ -33,8 +33,6 @@ static UIColor *colorWithHexString(NSString *hexString);
 	return store;
 }
 
-// handle unlink case
-
 - (DBTable *)table {
     return [[self store] getTable:self.fileName];
 }
@@ -52,8 +50,10 @@ static UIColor *colorWithHexString(NSString *hexString);
 	_colorCache = [NSCache new];
 	_fontCache = [NSCache new];
     _fileName = fileName;
- //   [self uploadTheme];
-//    [self update];
+#ifdef DEBUG
+    [self uploadTheme];
+    [self update];
+#endif
 
 	return self;
 }
@@ -72,16 +72,13 @@ static UIColor *colorWithHexString(NSString *hexString);
         newFileName = [newFileName substringToIndex:23];
     }
     DBRecord *updated_record = [[self table] getOrInsertRecord:[NSString stringWithFormat:@"%@_updated", newFileName] fields:nil inserted:nil error:nil];
-    DBRecord *original_record = [[self table] getOrInsertRecord:[NSString stringWithFormat:@"%@_original", newFileName] fields:nil inserted:nil error:nil];
     
     for (NSString *key in [self.themeDictionary allKeys]) {
         NSString *newKey = key;
         if (key.length > 32) {
             newKey = [key substringToIndex:32];
         }
-   //     id originalValue = [original_record objectForKey:newKey];
         id newValue = [updated_record objectForKey:newKey];
-        NSLog(@"new value is %@", newValue);
         if (newValue) {
             if ([[self.themeDictionary objectForKey:key] isKindOfClass:[NSNumber class]]) {
                 NSMutableDictionary *newThemeDict = [NSMutableDictionary dictionaryWithDictionary:self.themeDictionary];
@@ -94,7 +91,6 @@ static UIColor *colorWithHexString(NSString *hexString);
             }
         }
 	}
-    NSLog(@"after update, new themedict is %@", self.themeDictionary);
 }
 
 - (void)uploadTheme {
@@ -103,47 +99,47 @@ static UIColor *colorWithHexString(NSString *hexString);
         if ([self store].status & (DBDatastoreIncoming | DBDatastoreOutgoing)) {
             [[self store] sync:nil];
         }
-            [slf update];
+        [slf update];
     }];
 
-    // make sure to add the check
-    //sanitize the dictionary
+    // sanitize the dictionary
     NSMutableDictionary *uploadDict = [[NSMutableDictionary alloc] init];
+    NSUInteger keyLengthCutoff = 32;
     for (NSString *key in self.themeDictionary) {
         NSString *newKey = key;
-        if (key.length > 32) {
-            newKey = [key substringToIndex:32];
+        if (key.length > keyLengthCutoff) { // datastore api currently does not support keys more than length == 32
+            newKey = [key substringToIndex:keyLengthCutoff];
         }
         [uploadDict setObject:self.themeDictionary[key] forKey:newKey];
     }
     
-    //delete all records
-//    NSArray *tableIds = [[self store] getTables:nil];
-//    for (DBTable *table in tableIds) {
-//        NSArray *toDelete = [[[self store] getTable:[table tableId]]  query:nil error:nil];
-//        for (DBRecord *record in toDelete) {
-//            [record deleteRecord];
-//        }
-//    }
-//    [[self store] sync:nil];
-//    NSArray *records = [self.table query:nil error:nil];
-//    NSString *errorString = [NSString stringWithFormat:@"there should only be one record in table %@", self.fileName];
-//    NSAssert([records count] <= 1, errorString);
-//    if ([records count] == 0) {
-//        [self.table insert:uploadDict];
-//    } else {
-//        DBRecord *record = records[0];
-        BOOL inserted = NO;
-    NSString *newFileName = self.fileName;
-    if (newFileName.length > 23) {
-        newFileName = [newFileName substringToIndex:23];
+    // delete all records
+    /*
+    NSArray *tableIds = [[self store] getTables:nil];
+    for (DBTable *table in tableIds) {
+        NSArray *toDelete = [[[self store] getTable:[table tableId]]  query:nil error:nil];
+        for (DBRecord *record in toDelete) {
+            [record deleteRecord];
+        }
     }
-    DBRecord *newRecord = [self.table getOrInsertRecord:[NSString stringWithFormat:@"%@_original", newFileName] fields:uploadDict inserted:&inserted error:nil];
+    [[self store] sync:nil];
+    NSArray *records = [self.table query:nil error:nil];
+    NSString *errorString = [NSString stringWithFormat:@"there should only be one record in table %@", self.fileName];
+    NSAssert([records count] <= 1, errorString);
+    if ([records count] == 0) {
+        [self.table insert:uploadDict];
+    } else {
+        DBRecord *record = records[0];
+    */
+    BOOL inserted = NO;
+    NSString *newFileName = self.fileName;
+    NSString *originalSubstring = @"_original";
+    if (newFileName.length > keyLengthCutoff - originalSubstring.length) {
+        newFileName = [newFileName substringToIndex:keyLengthCutoff - originalSubstring.length];
+    }
+    DBRecord *newRecord = [self.table getOrInsertRecord:[NSString stringWithFormat:@"%@%@", newFileName, originalSubstring] fields:uploadDict inserted:&inserted error:nil];
     [newRecord update:uploadDict];
-    NSLog(@"inserted is %d", inserted);
-    NSLog(@"new record is %@", newRecord);
-        [[self store] sync:nil];
-//    }
+    [[self store] sync:nil];
 }
 
 - (BOOL)boolForKey:(NSString *)key {
@@ -355,7 +351,6 @@ static UIColor *colorWithHexString(NSString *hexString);
 static BOOL stringIsEmpty(NSString *s) {
 	return s == nil || [s length] == 0;
 }
-
 
 static UIColor *colorWithHexString(NSString *hexString) {
 

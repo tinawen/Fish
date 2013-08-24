@@ -19,7 +19,6 @@
 
 @implementation VSThemeLoader
 
-
 - (id)initWithPathForResource:(NSString *)pathForResource {
 	
 	self = [super init];
@@ -61,4 +60,6 @@
 }
 
 @end
+
+
 

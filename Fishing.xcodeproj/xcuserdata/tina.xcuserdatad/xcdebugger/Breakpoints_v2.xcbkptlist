@@ -20,7 +20,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fishing/FishingViewController.m"
-            timestampString = "397598453.946853"
+            timestampString = "398579861.713351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fishing/FishingMyScene.m"
-            timestampString = "397790192.311078"
+            timestampString = "399071507.870866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
             landmarkName = "-didBeginContact:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fishing/FishingMyScene.m"
-            timestampString = "397790192.311078"
+            timestampString = "399071507.870866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "-didBeginContact:"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fishing/FishingMyScene.m"
-            timestampString = "397790192.311078"
+            timestampString = "399071507.870866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "-didBeginContact:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fishing/FishingMyScene.m"
-            timestampString = "397790192.311078"
+            timestampString = "399071507.870866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "-generateRandomFish"
             landmarkType = "5">
          </BreakpointContent>

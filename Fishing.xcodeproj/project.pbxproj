@@ -25,7 +25,9 @@
 		260CDC4717B224EF00B13974 /* FishingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 260CDC4617B224EF00B13974 /* FishingTests.m */; };
 		2627299517B38ED200E1BAC8 /* whale.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2627299417B38ED200E1BAC8 /* whale.atlas */; };
 		2627299717B38EDA00E1BAC8 /* shark.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2627299617B38EDA00E1BAC8 /* shark.atlas */; };
-		264AA47817B235DF0089D1BC /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 264AA47617B235DF0089D1BC /* MyParticle.sks */; };
+		264AA47817B235DF0089D1BC /* Bubbles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 264AA47617B235DF0089D1BC /* Bubbles.sks */; };
+		265A8BE017C9449D005D20D1 /* waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 265A8BDF17C9449D005D20D1 /* waves.png */; };
+		265A8BE217C944D5005D20D1 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 265A8BE117C944D5005D20D1 /* bg@2x.png */; };
 		266CA40F17B57F6900EE53EB /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = 266CA40D17B57F6900EE53EB /* panda.png */; };
 		266CA41017B57F6900EE53EB /* panda@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266CA40E17B57F6900EE53EB /* panda@2x.png */; };
 		266CA41317B58A2C00EE53EB /* drew.png in Resources */ = {isa = PBXBuildFile; fileRef = 266CA41117B58A2C00EE53EB /* drew.png */; };
@@ -45,7 +47,6 @@
 		26D43A0B17B3663500860D9E /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0617B3663500860D9E /* bubble.png */; };
 		26D43A0C17B3663500860D9E /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0717B3663500860D9E /* cloud.png */; };
 		26D43A0D17B3663500860D9E /* hook.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0817B3663500860D9E /* hook.png */; };
-		26D43A1017B3666000860D9E /* waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D43A0F17B3666000860D9E /* waves.png */; };
 		26E78A7E17B4B13600F44988 /* bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A7D17B4B13600F44988 /* bubble@2x.png */; };
 		26E78A8317B4B16100F44988 /* boat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A7F17B4B16100F44988 /* boat@2x.png */; };
 		26E78A8417B4B16100F44988 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A8017B4B16100F44988 /* cloud@2x.png */; };
@@ -57,7 +58,6 @@
 		26E78A9317B4C0BF00F44988 /* tina.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A9117B4C0BF00F44988 /* tina.png */; };
 		26E78A9417B4C0BF00F44988 /* tina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A9217B4C0BF00F44988 /* tina@2x.png */; };
 		26E78A9717B4C21D00F44988 /* Sun.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A9517B4C21D00F44988 /* Sun.sks */; };
-		26E78A9817B4C21D00F44988 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A9617B4C21D00F44988 /* spark.png */; };
 		26E78A9B17B4C69C00F44988 /* nessie.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A9917B4C69C00F44988 /* nessie.png */; };
 		26E78A9C17B4C69C00F44988 /* nessie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E78A9A17B4C69C00F44988 /* nessie@2x.png */; };
 		26F8D92F17B4DB9600DF7369 /* FishRight.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26F8D92E17B4DB9600DF7369 /* FishRight.sks */; };
@@ -113,7 +113,9 @@
 		260CDC4617B224EF00B13974 /* FishingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishingTests.m; sourceTree = "<group>"; };
 		2627299417B38ED200E1BAC8 /* whale.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = whale.atlas; sourceTree = "<group>"; };
 		2627299617B38EDA00E1BAC8 /* shark.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = shark.atlas; sourceTree = "<group>"; };
-		264AA47617B235DF0089D1BC /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		264AA47617B235DF0089D1BC /* Bubbles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bubbles.sks; sourceTree = "<group>"; };
+		265A8BDF17C9449D005D20D1 /* waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waves.png; sourceTree = "<group>"; };
+		265A8BE117C944D5005D20D1 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		266CA40D17B57F6900EE53EB /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
 		266CA40E17B57F6900EE53EB /* panda@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "panda@2x.png"; sourceTree = "<group>"; };
 		266CA41117B58A2C00EE53EB /* drew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drew.png; sourceTree = "<group>"; };
@@ -136,7 +138,6 @@
 		26D43A0617B3663500860D9E /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
 		26D43A0717B3663500860D9E /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
 		26D43A0817B3663500860D9E /* hook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hook.png; sourceTree = "<group>"; };
-		26D43A0F17B3666000860D9E /* waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waves.png; sourceTree = "<group>"; };
 		26E78A7D17B4B13600F44988 /* bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble@2x.png"; sourceTree = "<group>"; };
 		26E78A7F17B4B16100F44988 /* boat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boat@2x.png"; sourceTree = "<group>"; };
 		26E78A8017B4B16100F44988 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud@2x.png"; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		26E78A9117B4C0BF00F44988 /* tina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tina.png; sourceTree = "<group>"; };
 		26E78A9217B4C0BF00F44988 /* tina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tina@2x.png"; sourceTree = "<group>"; };
 		26E78A9517B4C21D00F44988 /* Sun.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sun.sks; sourceTree = "<group>"; };
-		26E78A9617B4C21D00F44988 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		26E78A9917B4C69C00F44988 /* nessie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nessie.png; sourceTree = "<group>"; };
 		26E78A9A17B4C69C00F44988 /* nessie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nessie@2x.png"; sourceTree = "<group>"; };
 		26F8D92E17B4DB9600DF7369 /* FishRight.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FishRight.sks; sourceTree = "<group>"; };
@@ -240,14 +240,14 @@
 		260CDC1C17B224EF00B13974 /* Fishing */ = {
 			isa = PBXGroup;
 			children = (
-				260CDC2517B224EF00B13974 /* FishingAppDelegate.h */,
-				260CDC2617B224EF00B13974 /* FishingAppDelegate.m */,
-				260CDC2817B224EF00B13974 /* Main.storyboard */,
 				260CDC2B17B224EF00B13974 /* FishingViewController.h */,
 				260CDC2C17B224EF00B13974 /* FishingViewController.m */,
 				260CDC2E17B224EF00B13974 /* FishingMyScene.h */,
 				260CDC2F17B224EF00B13974 /* FishingMyScene.m */,
 				266FB7AF17B2B1DE007BC72F /* FishingMyScene.plist */,
+				260CDC2517B224EF00B13974 /* FishingAppDelegate.h */,
+				260CDC2617B224EF00B13974 /* FishingAppDelegate.m */,
+				260CDC2817B224EF00B13974 /* Main.storyboard */,
 				266FB7C817B2D58A007BC72F /* FishingThemeManager.h */,
 				266FB7C917B2D58A007BC72F /* FishingThemeManager.m */,
 				260CDC3317B224EF00B13974 /* Images.xcassets */,
@@ -272,11 +272,12 @@
 				266CA41217B58A2C00EE53EB /* drew@2x.png */,
 				26E78A8917B4BED500F44988 /* app.png */,
 				26E78A8A17B4BED500F44988 /* app@2x.png */,
+				26D43A0717B3663500860D9E /* cloud.png */,
 				26E78A8017B4B16100F44988 /* cloud@2x.png */,
+				265A8BDF17C9449D005D20D1 /* waves.png */,
 				26E78A8217B4B16100F44988 /* waves@2x.png */,
 				26D43A0617B3663500860D9E /* bubble.png */,
 				26E78A7D17B4B13600F44988 /* bubble@2x.png */,
-				26D43A0717B3663500860D9E /* cloud.png */,
 				26FF68E517B4D877001A2C60 /* fish.png */,
 				26FF68E617B4D877001A2C60 /* fish@2x.png */,
 				26F8D93017B4DD5900DF7369 /* sharkLeft.png */,
@@ -287,25 +288,24 @@
 				26F946B217B4DE8200AEC9C2 /* whaleLeft@2x.png */,
 				26F946B317B4DE8200AEC9C2 /* whaleRight.png */,
 				26F946B417B4DE8200AEC9C2 /* whaleRight@2x.png */,
-				26D43A0F17B3666000860D9E /* waves.png */,
 				26E78A9917B4C69C00F44988 /* nessie.png */,
 				26E78A9A17B4C69C00F44988 /* nessie@2x.png */,
 				2694721D17B369BE00FF2FD4 /* bg.png */,
+				265A8BE117C944D5005D20D1 /* bg@2x.png */,
 				26D43A0817B3663500860D9E /* hook.png */,
 				26E78A8717B4B1E700F44988 /* hook@2x.png */,
-				264AA47617B235DF0089D1BC /* MyParticle.sks */,
-				260CDC1E17B224EF00B13974 /* Fishing-Info.plist */,
+				264AA47617B235DF0089D1BC /* Bubbles.sks */,
 				26E78A9517B4C21D00F44988 /* Sun.sks */,
-				26E78A9617B4C21D00F44988 /* spark.png */,
-				260CDC1F17B224EF00B13974 /* InfoPlist.strings */,
-				260CDC2217B224EF00B13974 /* main.m */,
-				260CDC2417B224EF00B13974 /* Fishing-Prefix.pch */,
 				26F8D93A17B4DD9500DF7369 /* SharkRight.sks */,
 				26F8D93817B4DD6100DF7369 /* SharkLeft.sks */,
 				26F946B917B4DEC300AEC9C2 /* WhaleLeft.sks */,
 				26F946BA17B4DEC300AEC9C2 /* WhaleRight.sks */,
 				26FF68E317B4D677001A2C60 /* FishLeft.sks */,
 				26F8D92E17B4DB9600DF7369 /* FishRight.sks */,
+				260CDC1F17B224EF00B13974 /* InfoPlist.strings */,
+				260CDC2417B224EF00B13974 /* Fishing-Prefix.pch */,
+				260CDC1E17B224EF00B13974 /* Fishing-Info.plist */,
+				260CDC2217B224EF00B13974 /* main.m */,
 				266FB7B417B2B21E007BC72F /* Vendor */,
 			);
 			name = "Supporting Files";
@@ -441,8 +441,8 @@
 				26E78A8817B4B1E700F44988 /* hook@2x.png in Resources */,
 				26E78A9B17B4C69C00F44988 /* nessie.png in Resources */,
 				26E78A9417B4C0BF00F44988 /* tina@2x.png in Resources */,
+				265A8BE217C944D5005D20D1 /* bg@2x.png in Resources */,
 				266CA41017B57F6900EE53EB /* panda@2x.png in Resources */,
-				26D43A1017B3666000860D9E /* waves.png in Resources */,
 				26E78A8317B4B16100F44988 /* boat@2x.png in Resources */,
 				26E78A9717B4C21D00F44988 /* Sun.sks in Resources */,
 				26F946B617B4DE8200AEC9C2 /* whaleLeft@2x.png in Resources */,
@@ -463,16 +463,16 @@
 				26D43A0C17B3663500860D9E /* cloud.png in Resources */,
 				260CDC2117B224EF00B13974 /* InfoPlist.strings in Resources */,
 				26F946BC17B4DEC300AEC9C2 /* WhaleRight.sks in Resources */,
-				26E78A9817B4C21D00F44988 /* spark.png in Resources */,
 				26E78A8C17B4BED500F44988 /* app@2x.png in Resources */,
 				26F946B517B4DE8200AEC9C2 /* whaleLeft.png in Resources */,
-				264AA47817B235DF0089D1BC /* MyParticle.sks in Resources */,
+				264AA47817B235DF0089D1BC /* Bubbles.sks in Resources */,
 				2627299517B38ED200E1BAC8 /* whale.atlas in Resources */,
 				26FF68E417B4D677001A2C60 /* FishLeft.sks in Resources */,
 				260CDC3417B224EF00B13974 /* Images.xcassets in Resources */,
 				260CDC2A17B224EF00B13974 /* Main.storyboard in Resources */,
 				26E78A9317B4C0BF00F44988 /* tina.png in Resources */,
 				26F8D92F17B4DB9600DF7369 /* FishRight.sks in Resources */,
+				265A8BE017C9449D005D20D1 /* waves.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

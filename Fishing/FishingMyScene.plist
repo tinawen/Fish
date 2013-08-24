@@ -11,7 +11,7 @@
 		<key>fishDensity</key>
 		<integer>1</integer>
 		<key>shouldShowEasterEgg</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>percentComingFromLeft</key>
 		<integer>50</integer>
 		<key>fishToSharkFrequency</key>
